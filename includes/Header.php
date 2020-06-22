@@ -187,7 +187,10 @@
                         <a href="GestionPointage.php">
                             <i class="fas fa-hand-pointer"></i>Pointages</a>
                     </li>
-
+                    <li>
+                        <a href="AutoPointage.php">
+                            <i class="fas fa-id-card"></i>Face recognition</a>
+                    </li>
                 </ul>
             </nav>
         </div>

@@ -13,6 +13,7 @@ $listEmp=array();
 $empSev =  new EmployeService();
 $listEmp = $empSev->getAllEmployeService();
 
+
 $resultat= array();
 $PointSev = new PointageService();
 if(!empty($_POST["date"]) and !empty($_POST["time"]) and !empty($_POST["type"]) and !empty($_POST["emp"])){
@@ -37,6 +38,15 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
 ?>
     <!--body-->
         <body style="font-size:16px">
+        <script>
+            let empList = <?php
+            echo "[";
+            foreach($listEmp as $emp){
+                echo "{ firstname :'".$emp->getPrenom()."',lastname :'".$emp->getNom()."',cin :'".$emp->getCIN()."', img:'".$emp->getPhoto()."'},";                
+            } 
+            echo "]";
+            ?>
+        </script>
         <!--start header-->
             <section class="au-breadcrumb m-t-75">
                 <div class="section__content section__content--p30">
@@ -54,8 +64,9 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
                 <div class="card-body card-block" style="padding-left: 0%;padding-right: 0%;">
                 <div class="row  justify-content-center bg-white rounded m-3 p-2 border shadow">
                     <div  class="col-12 col-sm-8 ">
-                    <progress></progress>
-                    <div class="invisible h-0">
+                    <progress></progress>                    
+                    <button id="retry" type="button" class="btn btn-success btn-lg btn-block invisible d-none">Retry</button>
+                    <div class="invisible d-none">
                         <video class="" width="700px" height="500px"  autoplay>
                         </video>
                     </div>
@@ -88,13 +99,14 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
                             <td>
                                 <div class="col col-sm-10" >
                                     <label for="date" class=" form-control-label">Date:</label>
-                                    <input type="date" id="date" name="date" class="form-control" required style="width:150px">
+                                    <input type="date" id="date" name="date" class="form-control" required style="width:150px" value="<?php echo date("Y-m-d");?>" disabled>
                                 </div>
                             </td>
                             <td>
-                                <div class="col col-sm-7" style="width:200px">
+                                <div class="col col-sm-7" style="width:300px">
                                     <label for="heure" class=" form-control-label">Heure:</label>
-                                    <input type="time" id="input-small" VALUE="<?php echo date_timestamp_get();?>" name="time" style="-moz-appearance: textfield" class="form-control" required style="width:150px" >
+                                    <input type="time" id="input-small" value="<?php echo date("h:i:s");?>" name="time" style="-moz-appearance: textfield" class="form-control" required style="width:150px" disabled>
+
                                 </div>
                             </td>
 
@@ -256,6 +268,8 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
         </div><br>
 
         <!-- END DATA TABLE -->
+        <script src="js/face-api.min.js"></script>
+        <script src="js/pointage.js"></script>
         </body>
     <!--end body-->
 <?php include('includes/Footer.php'); ?>
