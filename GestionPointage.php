@@ -38,91 +38,7 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
 ?>
     <!--body-->
         <body style="font-size:16px">
-        <script>
-            let empList = <?php
-            echo "[";
-            foreach($listEmp as $emp){
-                echo "{ firstname :'".$emp->getPrenom()."',lastname :'".$emp->getNom()."',cin :'".$emp->getCIN()."', img:'".$emp->getPhoto()."'},";                
-            } 
-            echo "]";
-            ?>
-        </script>
-        <!--start header-->
-            <section class="au-breadcrumb m-t-75">
-                <div class="section__content section__content--p30">
-                    <center><h1>Gestion de Pointage</h1></center>
-                </div>
-            </section>
-        <!--end header-->
-        <!--start form focntion-->
-            <center>
-            <div class="card">
-                <div class="card-header">
 
-                    <strong>Ajouter Un Pointage </strong>
-                </div>                
-                <div class="card-body card-block" style="padding-left: 0%;padding-right: 0%;">
-                <div class="row  justify-content-center bg-white rounded m-3 p-2 border shadow">
-                    <div  class="col-12 col-sm-8 ">
-                    <progress></progress>                    
-                    <button id="retry" type="button" class="btn btn-success btn-lg btn-block invisible d-none">Retry</button>
-                    <div class="invisible d-none">
-                        <video class="" width="700px" height="500px"  autoplay>
-                        </video>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                <div class="card-body card-block" style="padding-left: 0%;padding-right: 0%;">
-                    <form action="" method="post" id="Pointage">
-                        <table  width="80%">
-                            <td width="80%">
-                                <div class="col col-sm-20" style="width:100%">
-                                    <label for="type" class=" form-control-label">Employé:</label>
-                                    <select  id="type"  name="emp" class="form-control" required style="width:80%" >
-                                        <?php
-                                            foreach ($listEmp as $E) {
-                                                echo "<option value='" . $E->getCIN() . "'>" . $E->getCIN().'  :  '.$E->getNom().' '.$E->getPrenom()."</option>";
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col col-sm-10" style="width:200px">
-                                    <label for="type" class=" form-control-label">Type:</label>
-                                    <select  id="type"  name="type" class="form-control" required style="width:150px" >
-                                        <option selected>Entrée</option>
-                                        <option>Sortie</option>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col col-sm-10" >
-                                    <label for="date" class=" form-control-label">Date:</label>
-                                    <input type="date" id="date" name="date" class="form-control" required style="width:150px" value="<?php echo date("Y-m-d");?>" disabled>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col col-sm-7" style="width:300px">
-                                    <label for="heure" class=" form-control-label">Heure:</label>
-                                    <input type="time" id="input-small" value="<?php echo date("h:i:s");?>" name="time" style="-moz-appearance: textfield" class="form-control" required style="width:150px" disabled>
-
-                                </div>
-                            </td>
-
-                        </table>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-sm" form="Pointage" name="Ajouter">
-                        <i class="fa fa-dot-circle-o"></i> Ajouter
-                    </button>
-                    <button type="reset" class="btn btn-danger btn-sm" form="Pointage">
-                        <i class="fa fa-ban"></i> Annuler
-                    </button>
-                </div>
-            </div>
-            </center>
             <!--end form focntion-->
         <?php
         if(!empty($_GET["id"]) AND !empty($_GET["action"])){
@@ -130,7 +46,7 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
         $f = $PointSev->getPointageByIdService($_GET["id"]);
         ?>
         <center>
-            <div class="card" style="width: 50%;margin-top: 3%">
+            <div class="card mt-5" style="width: 50%;margin-top: 3%">
                 <div class="card-header" >
                     Modifiez le Pointage choisi :
                 </div>
@@ -208,7 +124,7 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
         ?>
 
         <!--Recherche-->
-        <div class="col-lg-6" style="margin-left: 12.5%">
+        <div class="col-lg-6" style="margin-left: 12.5%;margin-top: 120px;">
             <div class="card-body card-block">
                 <form action="" method="post" class="form-horizontal">
                     <div class="row form-group">
@@ -268,8 +184,8 @@ if(!empty($_GET["id"]) AND !empty($_GET["action"])){
         </div><br>
 
         <!-- END DATA TABLE -->
-        <script src="js/face-api.min.js"></script>
-        <script src="js/pointage.js"></script>
+        <!-- <script src="js/face-api.min.js"></script>
+        <script src="js/pointage.js"></script> -->
         </body>
     <!--end body-->
 <?php include('includes/Footer.php'); ?>

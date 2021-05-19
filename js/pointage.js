@@ -24,7 +24,6 @@ Promise.all([
 
 let interval;
 video.addEventListener('play',()=>{
-    document.querySelector('#type').disabled = true
     saveFaces()
     const canvas = faceapi.createCanvasFromMedia(video)
     document.body.append(canvas)
@@ -54,13 +53,20 @@ video.addEventListener('play',()=>{
                 empIndex = empList.map(emp=>emp.firstname+" "+emp.lastname).indexOf(bestMatch.label)
                 if(empIndex >= 0){
                     // console.log(empList[empIndex])
-                    document.querySelector('#type').value = empList[empIndex].cin
+                    document.querySelector('#emp').value = empList[empIndex].cin
                     clearInterval(interval)
                     canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
                     video.parentElement.classList.add('invisible')
                     video.parentElement.classList.add('d-none')
                     video.pause()
                     document.querySelector('input[type="time"]').value = new Date().toTimeString().split(' ')[0]
+                    const pointageLogs = pointageList.filter(el=>el.cin === empList[empIndex].cin)
+                    console.log(pointageLogs)
+                    const maxDate = Math.max(...pointageLogs.map(el=>el.timeStamp))
+                    console.log(maxDate)
+                    const lastPointage = pointageLogs.find(el=>el.timeStamp === maxDate)
+                    console.log(lastPointage)
+                    document.querySelector('#type').value = lastPointage.type[0] === "E" ? "Sortie" : "Entrée"
                     canvas.classList.add('invisible')
                     canvas.classList.add('d-none')                    
                     retry.classList.remove('invisible')
